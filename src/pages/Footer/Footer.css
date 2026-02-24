@@ -1,0 +1,369 @@
+/* =========================
+   FOOTER PAGE
+   (green background + huge wordmark)
+   everything in ABCDiatype
+   ========================= */
+
+.wfFooter{
+  margin-top: 300vh;
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  background: #5C9B4D; /* adjust to match your green */
+  color: rgba(236,238,239,0.92);
+  overflow: hidden;
+  font-family: "ABC Diatype Mono", system-ui, sans-serif;
+}
+
+/* huge top wordmark */
+.wfFooter__wordmark{
+  position: absolute;
+  width: auto;
+  top: 20px;
+  left: 18px;
+  right: 18px;
+  color: var(--fg);
+}
+
+.wfFooter__wordmark span{
+  display: block;
+}
+
+/* top row */
+.wfFooter__top{
+  position: absolute;
+  top: calc(160px + env(safe-area-inset-top));
+  left: calc(24px + env(safe-area-inset-left));
+  right: calc(24px + env(safe-area-inset-right));
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+  align-items: start;
+  gap: 24px;
+  font-size: 12px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.wfFooter__legal a,
+.wfFooter__nav a{
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.wfFooter__legal a{
+  text-decoration: none;
+}
+.wfFooter__legal a:hover{
+  color: var(--fg);
+  opacity: 50%;
+  transition: 200ms ease-in-out;
+}
+
+.wfFooter__sep{
+  margin: 0 8px;
+  opacity: 0.8;
+}
+
+.wfFooter__nav{
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.45px;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.wfFooter__navs a{
+  text-decoration: none;
+}
+.wfFooter__nav a:hover{
+  color: var(--fg);
+  opacity: 50%;
+  transition: 200ms ease-in-out;
+}
+
+.sfFooter__socials{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wfSocial{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 22px;
+  color: var(--fg);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.wfSocial:hover{
+  opacity: 50%;
+  transform: translateY(-2px);
+}
+
+.wfSocial__icon{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wfFooter__scroll{
+  justify-self: end;
+  opacity: 0.9;
+}
+
+/* bottom area */
+.wfFooter__bottom{
+  position: absolute;
+  left: calc(24px + env(safe-area-inset-left));
+  right: calc(24px + env(safe-area-inset-right));
+  bottom: calc(22px + env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.wfFooter__addresses{
+  font-size: 12px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  line-height: 8px;
+  opacity: 0.92;
+  max-width: 820px;
+  gap: 2px;
+}
+
+.wfFooter__addresses > div{
+  margin-top: 6px;
+}
+
+.wfFooter__right{
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.wfFooter__mark{
+  bottom: 4px;
+  width: 36px;
+  height: 36px;
+  color: rgba(236,238,239,0.92);
+}
+
+.wfFooter__copyright{
+  text-align: right;
+  font-size: 12px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  opacity: 0.92;
+  white-space: nowrap;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .wfFooter__top{
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: min-content;
+    gap: 18px;
+  }
+  .wfFooter__scroll{
+    justify-self: start;
+  }
+  .wfFooter__bottom{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .wfFooter__right{
+    align-items: center;
+  }
+}
+
+@media (max-width: 720px){
+/* Footer base */
+.wfFooter{
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  background: #5E9644;
+  color: #ECEEEF;
+  font-family: "ABC Diatype Mono", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* BIG WORDMARK pinned to bottom */
+.wfFooter__wordmark{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 10px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.wfFooter__wordmark .footerLogo{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Top region (nav + socials + legal + scroll) */
+.wfFooter__top{
+  top: 20vh;
+  left: 0;
+  position: relative;
+  z-index: 2;
+  padding: 0px 24px 0 24px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 28px;
+}
+
+/* Legal (PRIVACY | TERMS) */
+.wfFooter__legal{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
+.wfFooter__legal a{
+  color: #ECEEEF;
+  text-decoration: none;
+}
+
+.wfFooter__sep{
+  opacity: 0.95;
+}
+
+/* Nav (vertical stack) */
+.wfFooter__nav{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wfFooter__nav a{
+  color: #ECEEEF;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 1.80;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Social icons row */
+.wfFooter__socials{
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+/* you already use .wfSocial on each link */
+.wfSocial{
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ECEEEF;
+  text-decoration: none;
+}
+
+.wfSocial svg{
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: currentColor;
+}
+
+/* Scroll readout (top right in your design; if you want it visible on footer too) */
+.wfFooter__scroll{
+  display: none;
+}
+
+/* Bottom region (addresses + mark + copyright) */
+.wfFooter__bottom{
+  left: 0;
+  top: 38vh;
+  position: relative;
+  z-index: 2;
+
+  padding: 0 26px 170px 26px; /* IMPORTANT: leaves room for the big wordmark */
+  margin-top: auto;
+}
+
+/* Addresses sit above the mark/copyright */
+.wfFooter__addresses{
+  margin-top: 44px;
+  font-size: 12px;
+  line-height: 1.28;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
+.wfFooter__addresses > div{
+  margin-bottom: 10px;
+  max-width: 92%;
+}
+
+/* Bottom row: mark left, copyright right */
+.wfFooter__right{
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  bottom: 96px; /* sits above the big wordmark */
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  pointer-events: none;
+}
+
+.wfFooter__mark{
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.wfFooter__mark svg{
+  width: 40px;
+  height: 40px;
+  display: block;
+  fill: #ECEEEF;
+}
+
+.wfFooter__copyright{
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
+/* Small-phone adjustments */
+@media (max-width: 360px){
+  .wfFooter__top{ padding: 30px 20px 0 20px; }
+  .wfFooter__bottom{ padding: 0 20px 160px 20px; }
+  .wfFooter__scroll{ top: 30px; right: 20px; }
+  .wfFooter__right{ left: 20px; right: 20px; }
+  .wfFooter__nav a{ font-size: 30px; }
+  .wfFooter__addresses{ font-size: 16px; }
+}
+}

@@ -1,0 +1,112 @@
+/* ABOUT — static page (no JS scroll effects) */
+
+.wfAbout{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #151517; /* close to your screenshot */
+  color: #DDDDDD;
+  overflow: hidden;
+}
+
+.wfAbout__inner{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  padding: 36px 40px 30px;
+}
+
+/* Headline (Tobias) */
+.wfAbout__title{
+  margin: 0;
+  font-family: "Tobias", serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+
+  /* big but safe */
+  font-size: clamp(32px, 4vw, 72px);
+
+  /* screenshot has it spanning left-ish across top */
+  max-width: 1400px;
+}
+
+/* Center media */
+.wfAbout__media{
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 56vw);
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+}
+
+.wfAbout__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Bottom SVG copy */
+.wfAbout__copy{
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 64px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* never block clicks */
+}
+
+.wfAbout__copyDesktop,
+.wfAbout__copyMobile{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wfAbout__copyMobile{
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 720px){
+
+  .wfAbout{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  
+}
+
+  .wfAbout__inner{
+    padding: 26px 18px 18px;
+  }
+
+  .wfAbout__title{
+    display: none;
+  }
+
+  .wfAbout__media{
+    top: 22%;
+    height: 32vh;
+    width: min(80vw, 400px);
+  }
+
+  .wfAbout__copy{
+    left: 32px;
+    right: 32px;
+    bottom: 40px;
+  }
+
+  .wfAbout__copyDesktop{
+    display: none;
+  }
+  .wfAbout__copyMobile{
+    display: block;
+  }
+}

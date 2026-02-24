@@ -1,0 +1,112 @@
+/* =========================
+   CONTACT PAGE
+   ========================= */
+
+.wfContact{
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 80px 40px 0;
+}
+
+/* Headline */
+.wfContact__headline{
+  margin-top: 2vh;
+  font-family: "Thunder", system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 0.80;
+  letter-spacing: -0.5px;
+  color: var(--fg);
+  font-size: clamp(64px, 10vw, 160px);
+}
+
+/* Subtext */
+.wfContact__sub{
+  margin-top: 4px;
+  margin-bottom: 24px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.wfContact__subMain{
+  font-family: "ABC Diatype Mono", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.wfContact__subSmall{
+  margin-top: 24px;
+  font-family: "ABC Diatype Mono", system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.wfContact__contactLink{
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.wfContact__contactLink:hover{
+  opacity: 50%;
+  transition: 200ms ease-in-out;
+}
+
+/* Marquee */
+.wfContact__marquee{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-top: transparent;
+  padding: 24px 0;
+  margin-top: 24px;
+}
+
+.wfContact__marqueeTrack{
+  display: inline-flex;
+  gap: 80px;
+  white-space: nowrap;
+  animation: wfContactMarquee 18s linear infinite;
+}
+
+.wfContact__marqueeTrack span{
+  font-family: "Thunder", system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(48px, 6vw, 96px);
+  letter-spacing: -0.5px;
+}
+
+/* Smooth infinite scroll */
+@keyframes wfContactMarquee{
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Mobile */
+@media (max-width: 720px){
+  .wfContact{
+    min-height: 100vh;
+    padding: 60px 18px 0;
+  }
+
+  .wfContact__sub {
+    margin-top: 120px;
+  }
+
+  .wfContact__marqueeTrack{
+    gap: 40px;
+  }
+}

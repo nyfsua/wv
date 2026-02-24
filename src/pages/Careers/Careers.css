@@ -1,0 +1,299 @@
+/* =========================
+   CAREERS — updated marquee design (04.png)
+   ========================= */
+
+.wfCareers{
+  width: 100%;
+  min-height: 100vh;
+  background: #ECEEEF;
+  color: #1E1D1D;
+  padding: 26px 34px 34px;
+}
+
+/* ---------- Header ---------- */
+.wfCareers__header{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 8px;
+}
+
+.wfCareers__headline{
+  margin: 0;
+  font-family: "Tobias", serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+
+  /* big but safe */
+  font-size: clamp(32px, 4vw, 72px);
+
+  /* screenshot has it spanning left-ish across top */
+  max-width: 1400px;
+}
+
+/* ---------- Dual marquees (two overlapping rotated rectangles) ---------- */
+
+.wfCareers__marqueeStack{
+  position: relative;
+  margin-top: 18px;
+  height: 96px;            /* enough to hold both strips */
+  width: 100%;
+}
+
+/* shared strip style */
+.wfCareers__marquee{
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  display: block;
+  overflow: hidden;
+
+  background: #5E9644;
+  color: #ECEEEF;
+  text-decoration: none;
+  cursor: pointer;
+
+  padding: 14px 0;
+  transform-origin: center;
+  z-index: 1;
+  pointer-events: auto;
+
+  /* subtle smoothing */
+  will-change: transform;
+}
+
+/* TOP strip rotation */
+.wfCareers__marqueeTop{
+  top: 36px;
+  transform: rotate(3.12deg);
+  z-index: 2; /* sits above */
+}
+
+/* BOTTOM strip rotation */
+.wfCareers__marqueeBottom{
+  top: 40px;               /* overlap amount */
+  transform: rotate(-2.24deg);
+  z-index: 1;
+}
+
+/* pause on hover */
+.wfCareers__marquee:hover .wfCareers__marqueeTrack{
+  animation-play-state: paused;
+}
+
+/* track */
+.wfCareers__marqueeTrack{
+  width: max-content;
+  display: flex;
+  gap: 64px;
+  align-items: center;
+  will-change: transform;
+}
+
+/* text */
+.wfCareers__marqueeItem{
+  font-family: "ABC Diatype Mono", system-ui, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.95;
+}
+
+/* opposite directions */
+.wfCareers__marquee.isLeft .wfCareers__marqueeTrack{
+  animation: wfMarqueeLeft 10s linear infinite;
+}
+.wfCareers__marquee.isRight .wfCareers__marqueeTrack{
+  animation: wfMarqueeRight 10s linear infinite;
+}
+
+@keyframes wfMarqueeLeft{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-50%); }
+}
+@keyframes wfMarqueeRight{
+  0%{ transform: translateX(-50%); }
+  100%{ transform: translateX(0); }
+}
+
+/* pause animation when hovering either the anchor OR the moving track */
+.wfCareers__marquee:hover .wfCareers__marqueeTrack,
+.wfCareers__marqueeTrack:hover{
+  animation-play-state: paused !important;
+}
+
+/* responsive */
+@media (max-width: 820px){
+  .wfCareers__marqueeStack{
+    height: 76px;
+    margin-top: 14px;
+  }
+
+  .wfCareers__marquee{
+    padding: 12px 0;
+  }
+
+  .wfCareers__marqueeTop{ top: 8px; }
+  .wfCareers__marqueeBottom{ top: 36px; }
+
+  .wfCareers__marqueeItem{
+    font-size: 14px;
+    letter-spacing: 0.6px;
+  }
+
+  .wfCareers__marqueeTrack{
+    gap: 52px;
+  }
+}
+
+/* ---------- Body grid ---------- */
+.wfCareers__body{
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 440px 1fr;
+  gap: 44px;
+  align-items: start;
+}
+
+/* left preview */
+.wfCareers__previewFrame{
+  width: 100%;
+  height: 67vh;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #d9d9d9;
+}
+
+.wfCareers__previewImg{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.wfCareers__previewPlaceholder{
+  width: 100%;
+  height: 100%;
+  background: #d9d9d9;
+}
+
+/* right roster */
+.wfCareers__roster{
+  width: 100%;
+  border-top: 2px solid #1E1D1D;
+}
+
+.wfCareers__row{
+  border-bottom: 2px solid #1E1D1D;
+  padding: 2px 0 8px;
+  outline: none;
+}
+
+
+
+.wfCareers__rowTop{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.wfCareers__name{
+  font-family: "PP Neue Montreal", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.wfCareers__roles{
+  font-family: "ABC Diatype Mono", system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  text-align: right;
+}
+
+.wfCareers__rowBottom{
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wfCareers__view{
+  font-family: "ABC Diatype Mono", system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #1E1D1D;
+  opacity: 0.85;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wfCareers__view:hover{ opacity: 1; }
+
+/* subtle active cue (optional) */
+.wfCareers__row.isActive .wfCareers__name{ opacity: 1; }
+.wfCareers__row:not(.isActive) .wfCareers__name{ opacity: 0.92; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px){
+  .wfCareers__body{
+    grid-template-columns: 380px 1fr;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 820px){
+  .wfCareers{
+    padding: 22px 18px 26px;
+  }
+
+  .wfCareers__headline{
+    font-size: clamp(36px, 9.5vw, 54px);
+    max-width: 24ch;
+  }
+
+  .wfCareers__marquee{
+    padding: 10px 0;
+    clip-path: polygon(
+      0% 22%,
+      50% 8%,
+      100% 22%,
+      100% 78%,
+      50% 92%,
+      0% 78%
+    );
+  }
+
+  .wfCareers__marqueeItem{
+    font-size: 14px;
+    gap: 44px;
+  }
+
+  .wfCareers__body{
+    margin-top: 18px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .wfCareers__previewFrame{
+    display: none;
+  }
+
+  .wfCareers__row{
+    padding: 14px 0 12px;
+  }
+
+  .wfCareers__name{
+    font-size: 20px;
+  }
+}
