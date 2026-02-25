@@ -298,7 +298,7 @@
 /* Bottom region (addresses + mark + copyright) */
 .wfFooter__bottom{
   left: 0;
-  top: 32vh;
+  top: 24vh;
   position: relative;
   z-index: 2;
 
