@@ -1,4 +1,7 @@
 import "./WorkArchive.css";
+import goFreshThumb from "./thumbnails/go_fresh.png";
+import eitdThumb from "./thumbnails/eitd.png";
+import familyMeetingThumb from "./thumbnails/family_meeting.png";
 
 type WorkItem = {
   id: string;          // "01", "02", etc.
@@ -8,6 +11,7 @@ type WorkItem = {
 };
 
 const WORK_ITEMS: WorkItem[] = [
+
   {
     id: "01",
     title: "SEYI VIBEZ 'HOW ARE YOU'",
@@ -54,7 +58,7 @@ const WORK_ITEMS: WorkItem[] = [
     id: "08",
     title: "GO FRESH 'AD'",
     youtubeUrl: "https://drive.google.com/file/d/1cEVf4BNNkqpozsat8VhCkbqsS-czzbsL/view?usp=sharing",
-    thumbUrl: "src/pages/WorkArchive/thumbnails/go_fresh.png",
+    thumbUrl: goFreshThumb,
   },
   {
     id: "09",
@@ -66,13 +70,13 @@ const WORK_ITEMS: WorkItem[] = [
     id: "10",
     title: "EVEN IN THE DAY 'TRAILER'",
     youtubeUrl: "https://drive.google.com/file/d/1Cqu6gIPFaywnb7gkt8UyvZxkUQHmLi2g/view?usp=sharing",
-    thumbUrl: "src/pages/WorkArchive/thumbnails/eitd.png",
+    thumbUrl: eitdThumb,
   },
   {
     id: "11",
     title: "FAMILY MEETING 'AD'",
     youtubeUrl: "https://drive.google.com/file/d/1cEVf4BNNkqpozsat8VhCkbqsS-czzbsL/view?usp=sharing",
-    thumbUrl: "src/pages/WorkArchive/thumbnails/family_meeting.png",
+    thumbUrl: familyMeetingThumb,
   },
 ];
 

@@ -1,6 +1,13 @@
 import  { useMemo, useState } from "react";
 import "./Careers.css";
 
+import hassanImg from "./img/hassan.png";
+import banxImg from "./img/banx.png";
+import walterImg from "./img/walter.jpg";
+import jodanImg from "./img/jodan.png";
+import camImg from "./img/cam.png";
+import karoImg from "./img/karo.png";
+
 type Person = {
   name: string;
   roles: string;
@@ -94,7 +101,7 @@ export default function CareersPage({
           roles: "FOUNDER, PRODUCER",
           linkLabel: "VIEW WORK",
           href: "https://www.instagram.com/hassaniofafrica/",
-          imageSrc: "src/pages/Careers/img/hassan.png",
+          imageSrc: hassanImg,
           imageAlt: "Hassan",
         },
         {
@@ -102,7 +109,7 @@ export default function CareersPage({
           roles: "FOUNDER, DIRECTOR",
           linkLabel: "VIEW WORK",
           href: "https://www.instagram.com/banx9figures/",
-          imageSrc: "src/pages/Careers/img/banx.png",
+          imageSrc: banxImg,
           imageAlt: "Banx",
         },
         {
@@ -110,7 +117,7 @@ export default function CareersPage({
           roles: "PHOTOGRAPHER, DIRECTOR",
           linkLabel: "VIEW WORK",
           href: "https://www.instagram.com/walterbanks_/",
-          imageSrc: "src/pages/Careers/img/walter.jpg",
+          imageSrc: walterImg,
           imageAlt: "Walterbanks",
         },
         {
@@ -118,7 +125,7 @@ export default function CareersPage({
           roles: "DIRECTOR",
           linkLabel: "VIEW WORK",
           href: "https://www.instagram.com/whoknowsjodan/",
-          imageSrc: "src/pages/Careers/img/jodan.png",
+          imageSrc: jodanImg,
           imageAlt: "Jodan",
         },
         {
@@ -126,7 +133,7 @@ export default function CareersPage({
           roles: "PHOTOGRAPHER",
           linkLabel: "VIEW WORK",
           href: "https://www.instagram.com/just_boycam/",
-          imageSrc: "src/pages/Careers/img/cam.png",
+          imageSrc: camImg,
           imageAlt: "Cam",
         },
         {
@@ -134,7 +141,7 @@ export default function CareersPage({
           roles: "DIRECTOR",
           linkLabel: "VIEW WORK",
           href: "https://www.instagram.com/karodaniels/",
-          imageSrc: "src/pages/Careers/img/karo.png",
+          imageSrc: karoImg,
           imageAlt: "KD",
         },
       ],
