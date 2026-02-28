@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+
 import landingImage from "./assets/landing.png";
 import landingImageMobile from "./assets/landing-mobile.png";
 
@@ -7,6 +9,8 @@ import WorkPage from "./pages/Work/WorkPage";
 import CareersPage from "./pages/Careers/Careers";
 import ContactPage from "./pages/Contact/Contact";
 import FooterPage from "./pages/Footer/Footer";
+
+import WorkArchive from "./pages/WorkArchive/WorkArchive";
 
 type Geo = {
   city?: string;
@@ -52,7 +56,6 @@ const LOGO_SVG = (
     xmlns="http://www.w3.org/2000/svg"
     aria-label="WAVFORMAT"
   >
-    {/* ... your existing logo paths ... */}
     <path
       d="M0 0.436364H9.77583L12.2861 16.2078L14.5 0.436364H26.2092L28.4544 16.2545L30.949 0.436364H40.6469L36.0786 23.5792H22.3581L20.3468 10.7688L18.3667 23.5792H4.59948L0 0.436364Z"
       fill="#ECEEEF"
@@ -92,9 +95,9 @@ const LOGO_SVG = (
   </svg>
 );
 
-// --- Mobile overlay icon placeholders (unchanged shapes, JSX-safe attrs) ---
-const OverlayInstagramSVG = (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+// keep your overlay svgs exactly as you have them...
+// (omitted here for brevity; paste yours unchanged)
+const OverlayInstagramSVG = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_2483_234)">
 <path d="M4.68672 0.0560112C3.83552 0.0961445 3.25425 0.232011 2.74605 0.431611C2.22019 0.636611 1.77439 0.911611 1.33085 1.35674C0.887388 1.80188 0.614188 2.24794 0.410721 2.77474C0.213788 3.28394 0.0803211 3.86574 0.0427211 4.71741C0.00512106 5.56908 -0.00321227 5.84288 0.000987726 8.01541C0.00512106 10.1878 0.0147211 10.4601 0.0559877 11.3136C0.0966544 12.1646 0.231988 12.7457 0.431654 13.2541C0.636988 13.78 0.911654 14.2256 1.35699 14.6693C1.80225 15.1129 2.24799 15.3855 2.77599 15.5893C3.28479 15.7859 3.86672 15.92 4.71825 15.9573C5.56979 15.9946 5.84385 16.0033 8.01572 15.9991C10.1876 15.9949 10.4611 15.9853 11.3143 15.9448C12.1676 15.9043 12.7456 15.768 13.2541 15.5693C13.7801 15.3635 14.226 15.0893 14.6693 14.6439C15.1127 14.1984 15.3857 13.752 15.589 13.2249C15.7861 12.7161 15.9201 12.1343 15.957 11.2833C15.9943 10.4294 16.0031 10.1568 15.999 7.98468C15.9948 5.81248 15.985 5.54014 15.9445 4.68701C15.9041 3.83388 15.7685 3.25454 15.569 2.74588C15.3634 2.21994 15.089 1.77468 14.6439 1.33068C14.1988 0.886678 13.752 0.613878 13.2252 0.411011C12.716 0.214011 12.1345 0.0798112 11.2829 0.0430112C10.4314 0.00621119 10.1573 -0.00332214 7.98465 0.000944527C5.81199 0.00507786 5.53999 0.0144112 4.68672 0.0560112ZM4.78019 14.5181C4.00019 14.4841 3.57665 14.3545 3.29439 14.2461C2.92065 14.1021 2.65439 13.928 2.37312 13.6494C2.09179 13.3709 1.91905 13.1037 1.77312 12.7307C1.66352 12.4485 1.53152 12.0254 1.49505 11.2454C1.45539 10.4024 1.44705 10.1493 1.44239 8.01341C1.43772 5.87761 1.44592 5.62474 1.48285 4.78141C1.51619 4.00208 1.64659 3.57808 1.75485 3.29594C1.89885 2.92174 2.07232 2.65594 2.35152 2.37488C2.63072 2.09374 2.89712 1.92061 3.27039 1.77468C3.55239 1.66461 3.97539 1.53374 4.75505 1.49661C5.59872 1.45661 5.85152 1.44861 7.98705 1.44394C10.1226 1.43928 10.3761 1.44728 11.2201 1.48448C11.9994 1.51834 12.4236 1.64748 12.7054 1.75648C13.0793 1.90048 13.3454 2.07341 13.6265 2.35314C13.9076 2.63274 14.0809 2.89821 14.2268 3.27228C14.337 3.55341 14.4679 3.97628 14.5047 4.75648C14.5449 5.60014 14.554 5.85315 14.5578 7.98848C14.5617 10.1238 14.5541 10.3774 14.5171 11.2205C14.4831 12.0005 14.3538 12.4241 14.2451 12.7067C14.1011 13.0803 13.9276 13.3467 13.6482 13.6277C13.3689 13.9087 13.1028 14.0817 12.7293 14.2277C12.4477 14.3376 12.0242 14.4688 11.2452 14.5059C10.4015 14.5456 10.1487 14.5539 8.01232 14.5586C5.87599 14.5633 5.62385 14.5546 4.78019 14.5181ZM11.302 3.72428C11.3023 3.91416 11.3589 4.09969 11.4647 4.2574C11.5705 4.4151 11.7206 4.53789 11.8962 4.61025C12.0717 4.68261 12.2648 4.70127 12.451 4.66389C12.6372 4.6265 12.8081 4.53475 12.9421 4.40022C13.0761 4.2657 13.1672 4.09446 13.2039 3.90815C13.2406 3.72184 13.2212 3.52883 13.1482 3.35355C13.0752 3.17826 12.9518 3.02856 12.7937 2.92338C12.6356 2.81821 12.4499 2.76228 12.26 2.76268C12.0054 2.76321 11.7615 2.8648 11.5819 3.04513C11.4022 3.22545 11.3016 3.46974 11.302 3.72428ZM3.89232 8.00801C3.89679 10.2768 5.73939 12.1118 8.00766 12.1075C10.2761 12.1032 12.1123 10.2608 12.1081 7.99201C12.1037 5.72321 10.2607 3.88768 7.99205 3.89214C5.72339 3.89661 3.88805 5.73948 3.89232 8.00801ZM5.33332 8.00515C5.33228 7.47773 5.48766 6.96186 5.77981 6.52275C6.07195 6.08364 6.48775 5.74103 6.97462 5.53823C7.46148 5.33543 7.99755 5.28156 8.51503 5.38343C9.03252 5.4853 9.50817 5.73833 9.88185 6.11052C10.2555 6.48272 10.5104 6.95736 10.6144 7.47444C10.7183 7.99151 10.6666 8.52779 10.4657 9.01546C10.2648 9.50313 9.92387 9.92028 9.48593 10.2142C9.04799 10.5081 8.53273 10.6655 8.00532 10.6665C7.65511 10.6673 7.30819 10.599 6.98437 10.4657C6.66055 10.3323 6.36616 10.1365 6.11804 9.88932C5.86991 9.64218 5.6729 9.34858 5.53826 9.02529C5.40362 8.702 5.33398 8.35535 5.33332 8.00515Z" fill="#1E1D1D"/>
 </g>
@@ -103,12 +106,8 @@ const OverlayInstagramSVG = (
 <rect width="16" height="16" fill="white"/>
 </clipPath>
 </defs>
-</svg>
-
-);
-
-const OverlayMailSVG = (
-  <svg
+</svg>;
+const OverlayMailSVG = <svg
     width="16"
     height="16"
     viewBox="0 0 16 16"
@@ -122,11 +121,8 @@ const OverlayMailSVG = (
       d="M5.7376 9.0672L8.0016 10.6152L10.184 9.1096L15.076 13.936C14.9472 13.9776 14.8096 14 14.6664 14H1.3336C1.1576 14 0.989601 13.9656 0.835201 13.904L5.7376 9.0672ZM16 5.1008V12.6664C16 12.864 15.9568 13.0512 15.88 13.22L11.0848 8.4888L16 5.1008ZM7.54882e-07 5.1432L4.8336 8.4488L0.0848008 13.1352C0.0285574 12.9853 -0.000169787 12.8265 7.54882e-07 12.6664V5.1432ZM14.6664 2C15.4024 2 16 2.5968 16 3.3336V3.8024L7.9984 9.3184L7.54882e-07 3.848V3.3336C7.54882e-07 2.5976 0.596801 2 1.3336 2H14.6664Z"
       fill="#1E1D1D"
     />
-  </svg>
-);
-
-const OverlayTikTokSVG = (
-  <svg
+  </svg>;
+const OverlayTikTokSVG = <svg
     width="16"
     height="16"
     viewBox="0 0 16 16"
@@ -145,11 +141,8 @@ const OverlayTikTokSVG = (
         <rect width="16" height="16" fill="white" />
       </clipPath>
     </defs>
-  </svg>
-);
-
-const OverlayXSVG = (
-  <svg
+  </svg>;
+const OverlayXSVG = <svg
     width="16"
     height="16"
     viewBox="0 0 16 16"
@@ -168,11 +161,8 @@ const OverlayXSVG = (
         <rect width="16" height="16" fill="white" />
       </clipPath>
     </defs>
-  </svg>
-);
-
-const OverlayMarkSVG = (
-  <svg
+  </svg>;
+const OverlayMarkSVG = <svg
     width="40"
     height="32"
     viewBox="0 0 40 32"
@@ -194,12 +184,8 @@ const OverlayMarkSVG = (
       d="M20 12.1858L10 2.27864L0 12.1858L10 22.0929L12 20.0619L14 18.13L16 16.1486L18 14.1424L20 12.1858Z"
       fill="#1E1D1D"
     />
-  </svg>
-);
-
-// leave your big word svg as-is
-const OverlayBigWordSVG = (
-  <svg width="387" height="35" viewBox="0 0 387 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+  </svg>;
+const OverlayBigWordSVG = <svg width="387" height="35" viewBox="0 0 387 35" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 0.636364H14.2227L17.8748 23.6364L21.0959 0.636364H38.1315L41.3979 23.7045L45.0273 0.636364H59.1366L52.4903 34.3864H32.5286L29.6023 15.7045L26.7215 34.3864H6.69172L0 0.636364Z" fill="#1E1D1D"/>
 <path d="M67.7583 0.636364H88.8996L102.147 34.3864H86.7673L84.9753 29.2727H71.1382L69.3008 34.3864H54.6698L67.7583 0.636364ZM81.5274 19.2955L78.1021 9.52273L74.6088 19.2955H81.5274Z" fill="#1E1D1D"/>
 <path d="M93.5516 0.636364H109.203L116.939 24.8182L124.674 0.636364H139.577L127.328 34.3864H105.846L93.5516 0.636364Z" fill="#1E1D1D"/>
@@ -209,45 +195,73 @@ const OverlayBigWordSVG = (
 <path d="M259.151 0.636364H280.156L284.556 17.2727L288.98 0.636364H309.418V34.3864H295.808L296.239 12.3864L289.91 34.3864H278.568L272.375 12.4318L272.761 34.3864H259.151V0.636364Z" fill="#1E1D1D"/>
 <path d="M322.191 0.636364H343.332L356.579 34.3864H341.2L339.408 29.2727H325.57L323.733 34.3864H309.102L322.191 0.636364ZM335.96 19.2955L332.534 9.52273L329.041 19.2955H335.96Z" fill="#1E1D1D"/>
 <path d="M361.254 11.2955H349.141V0.636364H387V11.2955H374.955V34.3864H361.254V11.2955Z" fill="#1E1D1D"/>
-</svg>
+</svg>;
 
-);
+function useIsHomeRoute() {
+  const { pathname } = useLocation();
+  return pathname === "/";
+}
 
-export default function App() {
-  // ✅ landing image selection based on viewport height
+function Home() {
+  // ✅ landing image selection based on viewport
   const [isShortViewport, setIsShortViewport] = useState(false);
 
-useEffect(() => {
-  const check = () => {
-    const shortHeight = window.innerHeight <= 720;
-    const narrowWidth = window.innerWidth <= 720;
+  useEffect(() => {
+    const check = () => {
+      const shortHeight = window.innerHeight <= 720;
+      const narrowWidth = window.innerWidth <= 720;
+      setIsShortViewport(shortHeight || narrowWidth);
+    };
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
-    // Decide what “mobile” really means for you:
-    setIsShortViewport(shortHeight || narrowWidth);
-  };
+  const landingBg = isShortViewport ? landingImageMobile : landingImage;
 
-  check();
-  window.addEventListener("resize", check, { passive: true });
+  return (
+    <>
+      <div
+        className="landingBg"
+        style={{
+          backgroundImage: `url(${landingBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
 
-  return () => {
-    window.removeEventListener("resize", check);
-  };
-}, []);
+      <main className="content">
+        <section id="about" className="aboutScreen">
+          <AboutPage />
+        </section>
 
-const landingBg = isShortViewport ? landingImageMobile : landingImage;
+        <section id="work" className="section">
+          <WorkPage />
+        </section>
+
+        <section id="careers" className="section">
+          <CareersPage />
+        </section>
+
+        <section id="contact" className="section">
+          <ContactPage />
+        </section>
+
+        <section id="solutions" className="section">
+          <FooterPage />
+        </section>
+      </main>
+    </>
+  );
+}
+
+export default function App() {
+  const isHome = useIsHomeRoute();
 
   // ---------- Scroll % ----------
   const [scrollPct, setScrollPct] = useState(0);
   const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-  const onScroll = () => {
-    document.documentElement.classList.toggle("pastLander", window.scrollY > 8);
-  };
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  return () => window.removeEventListener("scroll", onScroll);
-}, []);
 
   useEffect(() => {
     const compute = () => {
@@ -274,8 +288,17 @@ const landingBg = isShortViewport ? landingImageMobile : landingImage;
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", compute);
       if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
-    }
+    };
+  }, []);
 
+  // toggle pastLander for CSS (only meaningful on home)
+  useEffect(() => {
+    const onScroll = () => {
+      document.documentElement.classList.toggle("pastLander", window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // ---------- Geo + time ----------
@@ -289,7 +312,6 @@ const landingBg = isShortViewport ? landingImageMobile : landingImage;
 
   useEffect(() => {
     const ac = new AbortController();
-
     (async () => {
       try {
         const res = await fetch("https://ipapi.co/json/", { signal: ac.signal });
@@ -302,7 +324,6 @@ const landingBg = isShortViewport ? landingImageMobile : landingImage;
         setGeo({ city: guess || "LOCAL", timezone: tz });
       }
     })();
-
     return () => ac.abort();
   }, []);
 
@@ -314,7 +335,6 @@ const landingBg = isShortViewport ? landingImageMobile : landingImage;
 
   useEffect(() => {
     if (!menuOpen) return;
-
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
@@ -333,147 +353,104 @@ const landingBg = isShortViewport ? landingImageMobile : landingImage;
 
   return (
     <div className="page">
-
-       <div
-        className="landingBg"
-        style={{
-          backgroundImage: `url(${landingBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}>
-      </div>
-
       <div className="header">
-      {/* ✅ Fixed landing background layer */}
-     
+        <div className="logo">{LOGO_SVG}</div>
 
-      {/* Top-left logo */}
-      <div className="logo">{LOGO_SVG}</div>
+        {/* ✅ Desktop nav: WORK goes to /workarchive. Others stay as anchors on home only. */}
+        <nav className="navButtons desktopOnly" aria-label="Primary">
+          {isHome ? (
+            <>
+              <a href="#about">ABOUT</a>
+              <Link to="/workarchive">WORK</Link>
+              <a href="#careers">CAREERS</a>
+              <a href="#contact">CONTACT</a>
+              <a href="#solutions">SOLUTIONS</a>
+            </>
+          ) : (
+            <>
+              <Link to="/">ABOUT</Link>
+              <Link to="/workarchive">WORK</Link>
+              <Link to="/">CAREERS</Link>
+              <Link to="/">CONTACT</Link>
+              <Link to="/">SOLUTIONS</Link>
+            </>
+          )}
+        </nav>
 
-      {/* Desktop nav only */}
-      <nav className="navButtons desktopOnly" aria-label="Primary">
-        <a href="#about">ABOUT</a>
-        <a href="#work">WORK</a>
-        <a href="#careers">CAREERS</a>
-        <a href="#contact">CONTACT</a>
-        <a href="#solutions">SOLUTIONS</a>
-      </nav>
+        <button className="menuButton mobileOnly" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+          MENU <ExternalIcon />
+        </button>
 
-      {/* Mobile menu button only */}
-      <button
-        className="menuButton mobileOnly"
-        onClick={() => setMenuOpen(true)}
-        aria-label="Open menu"
-      >
-        MENU <ExternalIcon />
-      </button>
+        <div className="status">
+          {cityLabel}&nbsp;&nbsp;({timeLabel})
+        </div>
 
-      
+        {menuOpen && (
+          <div className="overlay" role="dialog" aria-modal="true" aria-label="Menu">
+            <button className="overlayClose" onClick={closeMenu} aria-label="Close menu">
+              ×
+            </button>
 
-      {/* Bottom-right city + time */}
-      <div className="status">
-        {cityLabel}&nbsp;&nbsp;({timeLabel})
-      </div>
+            <nav className="overlayNav" aria-label="Overlay navigation">
+              {isHome ? (
+                <>
+                  <a href="#about" onClick={closeMenu}>ABOUT</a>
+                  <Link to="/workarchive" onClick={closeMenu}>WORK</Link>
+                  <a href="#careers" onClick={closeMenu}>CAREERS</a>
+                  <a href="#contact" onClick={closeMenu}>CONTACT</a>
+                  <a href="#solutions" onClick={closeMenu}>SOLUTIONS</a>
+                </>
+              ) : (
+                <>
+                  <Link to="/" onClick={closeMenu}>ABOUT</Link>
+                  <Link to="/workarchive" onClick={closeMenu}>WORK</Link>
+                  <Link to="/" onClick={closeMenu}>CAREERS</Link>
+                  <Link to="/" onClick={closeMenu}>CONTACT</Link>
+                  <Link to="/" onClick={closeMenu}>SOLUTIONS</Link>
+                </>
+              )}
+            </nav>
 
-      {/* Mobile Overlay */}
-      {menuOpen && (
-        <div className="overlay" role="dialog" aria-modal="true" aria-label="Menu">
-          <button className="overlayClose" onClick={closeMenu} aria-label="Close menu">
-            ×
-          </button>
+            <div className="overlaySocial" aria-label="Social links">
+              <a href="#" aria-label="Instagram" onClick={(e) => e.preventDefault()}>{OverlayInstagramSVG}</a>
+              <a href="#" aria-label="Email" onClick={(e) => e.preventDefault()}>{OverlayMailSVG}</a>
+              <a href="#" aria-label="TikTok" onClick={(e) => e.preventDefault()}>{OverlayTikTokSVG}</a>
+              <a href="#" aria-label="X" onClick={(e) => e.preventDefault()}>{OverlayXSVG}</a>
+            </div>
 
-          <nav className="overlayNav" aria-label="Overlay navigation">
-            <a href="#about" onClick={closeMenu}>
-              ABOUT
-            </a>
-            <a href="#work" onClick={closeMenu}>
-              WORK
-            </a>
-            <a href="#careers" onClick={closeMenu}>
-              CAREERS
-            </a>
-            <a href="#contact" onClick={closeMenu}>
-              CONTACT
-            </a>
-            <a href="#solutions" onClick={closeMenu}>
-              SOLUTIONS
-            </a>
-          </nav>
+            <div className="overlayLegal">
+              <a href="#" onClick={(e) => e.preventDefault()}>PRIVACY POLICY</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>TERMS &amp; CONDITIONS</a>
+            </div>
 
-          <div className="overlaySocial" aria-label="Social links">
-            <a href="#" aria-label="Instagram" onClick={(e) => e.preventDefault()}>
-              {OverlayInstagramSVG}
-            </a>
-            <a href="#" aria-label="Email" onClick={(e) => e.preventDefault()}>
-              {OverlayMailSVG}
-            </a>
-            <a href="#" aria-label="TikTok" onClick={(e) => e.preventDefault()}>
-              {OverlayTikTokSVG}
-            </a>
-            <a href="#" aria-label="X" onClick={(e) => e.preventDefault()}>
-              {OverlayXSVG}
-            </a>
-          </div>
+            <div className="overlayAddresses" aria-label="Addresses">
+              <div>LAG | SS2, HOUSE 11-15, JADEVILLE ESTATE, LEKKI</div>
+              <div>LDN | 408, 8 DUNCANNON STREET, STRAND, WC2N 4JF</div>
+              <div>DKR | 032, SQUARE FACE MARCHÉ HLM, GRAND-DAKAR</div>
+            </div>
 
-          <div className="overlayLegal">
-            <a href="#" onClick={(e) => e.preventDefault()}>
-              PRIVACY POLICY
-            </a>
-            <a href="#" onClick={(e) => e.preventDefault()}>
-              TERMS &amp; CONDITIONS
-            </a>
-          </div>
+            <div className="overlayFooter" aria-label="Footer">
+              <div className="overlayMark">{OverlayMarkSVG}</div>
+              <div className="overlayRights">
+                © 2026 90642 INC
+                <br />
+                ALL RIGHTS RESERVED
+              </div>
+            </div>
 
-          <div className="overlayAddresses" aria-label="Addresses">
-            <div>LAG | SS2, HOUSE 11-15, JADEVILLE ESTATE, LEKKI</div>
-            <div>LDN | 408, 8 DUNCANNON STREET, STRAND, WC2N 4JF</div>
-            <div>DKR | 032, SQUARE FACE MARCHÉ HLM, GRAND-DAKAR</div>
-          </div>
-
-          <div className="overlayFooter" aria-label="Footer">
-            <div className="overlayMark">{OverlayMarkSVG}</div>
-            <div className="overlayRights">
-              © 2026 90642 INC
-              <br />
-              ALL RIGHTS RESERVED
+            <div className="overlayBigWord" aria-hidden="true">
+              {OverlayBigWordSVG}
             </div>
           </div>
-
-          <div className="overlayBigWord" aria-hidden="true">
-            {OverlayBigWordSVG}
-          </div>
-        </div>
-      )}
+        )}
       </div>
 
-      {/* Scroll readout (desktop only) */}
       <div className="scrollReadout desktopOnly">(SCROLL&nbsp;&nbsp;{scrollPct}%)</div>
 
-      {/* Scroll content */}
-      <main className="content">
-        {/* spacer so the fixed landing bg has a "first screen" */}
-
-        <section id="about" className="aboutScreen">
-          <AboutPage />
-        </section>
-
-        <section id="work" className="section">
-          <WorkPage />
-        </section>
-
-        <section id="careers" className="section">
-          <CareersPage />
-        </section>
-
-        <section id="contact" className="section">
-          <ContactPage />
-        </section>
-
-        <section id="solutions" className="section">
-          <FooterPage />
-        </section>
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/workarchive" element={<WorkArchive />} />
+      </Routes>
     </div>
   );
 }
