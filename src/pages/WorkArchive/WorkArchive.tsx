@@ -20,9 +20,9 @@ const WORK_ITEMS: WorkItem[] = [
   },
   {
     id: "02",
-    title: "SEYI VIBEZ '+234'",
-    youtubeUrl: "https://youtu.be/oTwuV0z8eqQ?si=oF2kZRwc4HIwRzcN",
-    thumbUrl: "https://i.ytimg.com/vi/oTwuV0z8eqQ/hqdefault.jpg",
+    title: "GO FRESH 'AD'",
+    youtubeUrl: "https://drive.google.com/file/d/1cEVf4BNNkqpozsat8VhCkbqsS-czzbsL/view?usp=sharing",
+    thumbUrl: goFreshThumb,
   },
   {
     id: "03",
@@ -32,9 +32,9 @@ const WORK_ITEMS: WorkItem[] = [
   },
   {
     id: "04",
-    title: "TIMAYA 'PAYBACK'",
-    youtubeUrl: "https://youtu.be/swL0Uo1Bj7s",
-    thumbUrl: "https://i.ytimg.com/vi/swL0Uo1Bj7s/hqdefault.jpg",
+   title: "SEYI VIBEZ '+234'",
+    youtubeUrl: "https://youtu.be/oTwuV0z8eqQ?si=oF2kZRwc4HIwRzcN",
+    thumbUrl: "https://i.ytimg.com/vi/oTwuV0z8eqQ/hqdefault.jpg",
   },
   {
     id: "05",
@@ -56,9 +56,9 @@ const WORK_ITEMS: WorkItem[] = [
   },
   {
     id: "08",
-    title: "GO FRESH 'AD'",
-    youtubeUrl: "https://drive.google.com/file/d/1cEVf4BNNkqpozsat8VhCkbqsS-czzbsL/view?usp=sharing",
-    thumbUrl: goFreshThumb,
+    title: "TIMAYA 'PAYBACK'",
+    youtubeUrl: "https://youtu.be/swL0Uo1Bj7s",
+    thumbUrl: "https://i.ytimg.com/vi/swL0Uo1Bj7s/hqdefault.jpg",
   },
   {
     id: "09",
